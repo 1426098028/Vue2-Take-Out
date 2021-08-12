@@ -1,10 +1,6 @@
 <template>
   <section class="order">
-    <header class="header">
-      <a class="header_title">
-        <span class="header_title_text">订单列表</span>
-      </a>
-    </header>
+<HeaderTop :tit="tit"></HeaderTop>
     <section class="order_no_login">
       <img src="./images/order/person.png" />
       <h3>登录后查看外卖订单</h3>
@@ -12,12 +8,17 @@
     </section>
   </section>
 </template>
-
 <script>
+import HeaderTop from "../../components/HeaderTop/HeaderTop.vue"
 export default {
   name: "Order",
+  components:{
+    HeaderTop
+  },
   data() {
-    return {};
+    return {
+      tit:"订单列表"
+    };
   },
 };
 </script>
