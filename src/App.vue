@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app">
     <router-view />
     <FooterGuide />
   </div>
@@ -12,4 +12,11 @@ export default {
   },
 };
 </script>
-<style lang="stylus" ref="stylesheet/stylus"></style>
+<style>
+@import url("../static/css/reset.css");
+.app {
+  width: 100%;
+  height: 100%;
+  background: #f5f5f5;
+}
+</style>
