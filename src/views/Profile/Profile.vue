@@ -4,8 +4,9 @@
 <HeaderTop :tit="tit"></HeaderTop>
 
     <section class="profile-number">
-      <a href="javascript:" class="profile-link">
-        <div class="profile_image">
+
+<router-link to="/Login" class="profile-link">
+     <div class="profile_image">
           <i class="iconfont icon-person"></i>
         </div>
         <div class="user-info">
@@ -20,7 +21,7 @@
         <span class="arrow">
           <i class="iconfont icon-jiantou1"></i>
         </span>
-      </a>
+</router-link>
     </section>
     <section class="profile_info_data border-1px">
       <ul class="info_data_list">

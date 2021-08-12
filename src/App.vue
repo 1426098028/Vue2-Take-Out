@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <router-view />
-    <FooterGuide />
+    <FooterGuide v-show="$route.meta.iSshowFooter" />
   </div>
 </template>
 <script>
@@ -10,6 +10,14 @@ export default {
   components: {
     FooterGuide, //映射成标签
   },
+  data(){
+    return{
+
+    }
+  },
+  created() {
+  },
+
 };
 </script>
 <style>
