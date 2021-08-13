@@ -5,41 +5,46 @@
   </div>
 </template>
 <script>
+// import { mapActions } from "vuex";
 import FooterGuide from "./components/FooterGuide/FooterGuide.vue";
-import {reqAddres,reqFoodCategorys,reqShops,reqSearchShop,Onecode,reqPwdLogin,reqSendCode,reqSmsLogin,reqUserInfo,reqLogout} from "./Api/main.js"
 export default {
   components: {
     FooterGuide, //映射成标签
   },
-  data(){
-    return{
-    }
+  data() {
+    return {};
   },
   created() {
-    reqUserInfo(
-      // {
-      //   params: { 
-      //    phone:"15622081255",
-      //    code:"317693"
-      //     },
-      //   body: { 
-      //    phone:"15622081255",
-      //    code:"317693"
-      //   },
-      // }
-    )
-  //   reqShops({
-  // url: "/position/40.10038,116.36867",
-  //   method: "GET",
-  //   body: {
-  //   //   latitude: 40.10038, // 纬度
-  //   // longitude: 116.36867, // 经度
-  //   },
-  //   params: {
-  //   }
-  //   })
+    // this.$store.commit("RECEIVE_ADDRESS", { dddd: "1111" });
+    // this.$store.dispatch("getAddres");
+    // reqAddres();
+    // {
+    //   params: {
+    //    phone:"15622081255",
+    //    code:"317693"
+    //     },
+    //   body: {
+    //    phone:"15622081255",
+    //    code:"317693"
+    //   },
+    // }
+    //   reqShops({
+    // url: "/position/40.10038,116.36867",
+    //   method: "GET",
+    //   body: {
+    //   //   latitude: 40.10038, // 纬度
+    //   // longitude: 116.36867, // 经度
+    //   },
+    //   params: {
+    //   }
+    //   })
   },
-
+  // methods: {
+  //   ...mapActions(["getAddres"]),
+  // },
+  mounted() {
+    // this.getAddres()
+  },
 };
 </script>
 <style>

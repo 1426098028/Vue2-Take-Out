@@ -1,7 +1,7 @@
 <template>
   <section class="msite">
     <!--首页头部-->
-    <HeaderTop :tit="tit">
+    <HeaderTop :tit="address.name">
       <template v-slot:Left>
         <span class="header_search">
           <i class="iconfont icon-sousuo"></i>
@@ -134,6 +134,7 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
 import HeaderTop from "../../components/HeaderTop/HeaderTop.vue";
 import ShopList from "../../components/ShopList/ShopList.vue";
 import Swiper from "swiper/swiper-bundle.min.js";
@@ -145,11 +146,20 @@ export default {
     ShopList,
   },
   data() {
-    return {
-      tit: "昌平区北七家宏福科技园(337省道北)",
-    };
+    return {};
+  },
+  computed: {
+    ...mapState(["address"]),
+  },
+  methods: {
+    // ...mapActions(["getAddres"]),
   },
   mounted() {
+    //获取定位
+    // this.getAddres();
+    this.$store.dispatch("getAddres");
+    //轮播图
+    // console.log(mapActions()),
     new Swiper(".swiper-container", {
       loop: true, // 循环模式选项
       autoplay: true, //可选选项，自动滑动
