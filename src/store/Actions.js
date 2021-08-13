@@ -50,6 +50,7 @@ import {
 } from "../Api/main.js";
 import { RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS } from "./Mutation-types"
 export default {
+    // 发送获取地址相关信息对象请求
     async getAddres({ commit }, Aoptions) {
         let res = await reqAddres()
         console.log("获取数据", res)
@@ -58,5 +59,18 @@ export default {
             console.log("------Actions--通过commit触发Mutauions--RECEIVE_ADDRESS------",)
             commit(RECEIVE_ADDRESS, Aoptions)
         }
+    },
+
+    // 发送获取食品分类数组请求
+    async getFoodCategorys({ commit }, Aoptions) {
+        let res = await reqFoodCategorys()
+        if (res.code === 0) {
+            Aoptions = res.data
+            console.log("------Actions--通过commit触发Mutauions--RECEIVE_ADDRESS------",)
+            commit(RECEIVE_CATEGORYS, Aoptions)
+        }
     }
+
+
+    // 发送获取商家数组请求
 }

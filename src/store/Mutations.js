@@ -37,7 +37,23 @@ export default {
         console.log(state)
         console.log(Moptions)
         state.address = Moptions
+    },
 
+    //获取食品分类数组
+    [RECEIVE_CATEGORYS](state, Moptions) {
+        console.log("------通过Actions获取到的数据------",)
+        console.log(state)
+        console.log(Moptions)
+        state.categorys = Moptions
+    },
 
+    //获取商家数组
+    [RECEIVE_SHOPS](state, Moptions) {
+        console.log("------通过Actions获取到的数据------",)
+        console.log(state)
+        console.log(Moptions)
+        state.shops = Moptions
     }
+
+
 }

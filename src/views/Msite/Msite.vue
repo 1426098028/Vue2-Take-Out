@@ -17,104 +17,21 @@
     <nav class="msite_nav">
       <div class="swiper-container">
         <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <a href="javascript:" class="link_to_food">
+          <div
+            class="swiper-slide"
+            v-for="(categorys, index) in categorysArr"
+            :key="index"
+          >
+            <a
+              href="javascript:"
+              class="link_to_food"
+              v-for="(category, index) in categorys"
+              :key="index"
+            >
               <div class="food_container">
-                <img src="../../../static/images/nav/1.jpg" />
+                <img :src="baseImageUrl + category.image_url" />
               </div>
-              <span>甜品饮品</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="../../../static/images/nav/2.jpg" />
-              </div>
-              <span>商超便利</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="../../../static/images/nav/3.jpg" />
-              </div>
-              <span>美食</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="../../../static/images/nav/4.jpg" />
-              </div>
-              <span>简餐</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="../../../static/images/nav/5.jpg" />
-              </div>
-              <span>新店特惠</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="../../../static/images/nav/6.jpg" />
-              </div>
-              <span>准时达</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="../../../static/images/nav/7.jpg" />
-              </div>
-              <span>预订早餐</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="../../../static/images/nav/8.jpg" />
-              </div>
-              <span>土豪推荐</span>
-            </a>
-          </div>
-          <div class="swiper-slide">
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="../../../static/images/nav/9.jpg" />
-              </div>
-              <span>甜品饮品</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="../../../static/images/nav/10.jpg" />
-              </div>
-              <span>商超便利</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="../../../static/images/nav/11.jpg" />
-              </div>
-              <span>美食</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="../../../static/images/nav/12.jpg" />
-              </div>
-              <span>简餐</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="../../../static/images/nav/13.jpg" />
-              </div>
-              <span>新店特惠</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="../../../static/images/nav/14.jpg" />
-              </div>
-              <span>准时达</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="../../../static/images/nav/1.jpg" />
-              </div>
-              <span>预订早餐</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="../../../static/images/nav/2.jpg" />
-              </div>
-              <span>土豪推荐</span>
+              <span>{{ category.title }}</span>
             </a>
           </div>
         </div>
@@ -146,32 +63,57 @@ export default {
     ShopList,
   },
   data() {
-    return {};
+    return {
+      baseImageUrl: "https://fuss10.elemecdn.com",
+    };
   },
   computed: {
-    ...mapState(["address"]),
+    ...mapState(["address", "categorys"]),
+    categorysArr: {
+      get() {
+        let Arr = [];
+        let minArr = [];
+        Object.keys(this.categorys).forEach((item, index) => {
+          minArr.push(this.categorys[index]);
+          if (minArr.length === 8) {
+            Arr.push(minArr);
+            minArr = [];
+          }
+        });
+        console.log("Arr", Arr);
+        return Arr;
+      },
+      set() {},
+    },
   },
   methods: {
-    // ...mapActions(["getAddres"]),
+    //获取食品分类数组函数
+    ...mapActions(["getFoodCategorys"]),
   },
   mounted() {
-    //获取定位
-    // this.getAddres();
-    this.$store.dispatch("getAddres");
-    //轮播图
-    // console.log(mapActions()),
-    new Swiper(".swiper-container", {
-      loop: true, // 循环模式选项
-      autoplay: true, //可选选项，自动滑动
-      // 如果需要分页器
-      pagination: {
-        el: ".swiper-pagination",
-      },
-    });
+    //调用获取食品分类数组函数
+    this.getFoodCategorys();
+  },
+
+  watch: {
+    categorys(newValue, oldValue) {
+      //界面更新完毕立即调用this.$nextTtick(()=>{创建Swiper实例对象})
+      this.$nextTick(() => {
+        //轮播图
+        new Swiper(".swiper-container", {
+          loop: true, // 循环模式选项
+          autoplay: true, //可选选项，自动滑动
+          // 如果需要分页器
+          pagination: {
+            el: ".swiper-pagination",
+          },
+        });
+      });
+    },
   },
 };
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 @import '../../common/stylus/mixins.styl';
 @import './Msite.styl';
-</style>	
+</style>

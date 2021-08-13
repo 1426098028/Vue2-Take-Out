@@ -5,10 +5,7 @@ import FlyAjaxPromise from './FlyAjaxPromise'
 
 export const reqAddres = (Geohash) => { return FlyAjaxPromise({ url: "/position/40.10038,116.36867", method: "get", ...Geohash, }) }
 
-// // [2、获取食品分类列表]
-// //和下面一样    下面是箭头函数的简写
-// export const reqFoodCategorys = () => { return ajax(BASE_URL + "/index_category") }
-// // export const reqFoodCategorys = () => ajax(BASE_URL + '/index_category')
+// [2、获取食品分类列表]
 export const reqFoodCategorys = (FoodCategorys) => { return FlyAjaxPromise({ url: "/index_category", method: "get", ...FoodCategorys, }) }
 
 // // [3、根据经纬度获取商铺列表]

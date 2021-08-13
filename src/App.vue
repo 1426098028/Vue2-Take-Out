@@ -5,7 +5,7 @@
   </div>
 </template>
 <script>
-// import { mapActions } from "vuex";
+import { mapActions } from "vuex";
 import FooterGuide from "./components/FooterGuide/FooterGuide.vue";
 export default {
   components: {
@@ -16,7 +16,7 @@ export default {
   },
   created() {
     // this.$store.commit("RECEIVE_ADDRESS", { dddd: "1111" });
-    // this.$store.dispatch("getAddres");
+    // this.$store.dispatch("getFoodCategorys");
     // reqAddres();
     // {
     //   params: {
@@ -39,11 +39,13 @@ export default {
     //   }
     //   })
   },
-  // methods: {
-  //   ...mapActions(["getAddres"]),
-  // },
+  methods: {
+    //获取定位
+    ...mapActions(["getAddres"]),
+  },
   mounted() {
-    // this.getAddres()
+    //调用获取定位
+    this.getAddres();
   },
 };
 </script>
