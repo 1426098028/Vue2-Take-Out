@@ -1,18 +1,18 @@
 <template>
   <section class="msite">
     <!--首页头部-->
-<HeaderTop :tit="tit">
-  <template v-slot:Left>
- <span class="header_search"   >
-        <i class="iconfont icon-sousuo"></i>
-      </span>
-  </template>
-  <template v-slot:Right>
-  <span class="header_login" >
-        <span class="header_login_text">登录|注册</span>
-      </span>
-  </template>
-</HeaderTop>
+    <HeaderTop :tit="tit">
+      <template v-slot:Left>
+        <span class="header_search">
+          <i class="iconfont icon-sousuo"></i>
+        </span>
+      </template>
+      <template v-slot:Right>
+        <span class="header_login">
+          <span class="header_login_text">登录|注册</span>
+        </span>
+      </template>
+    </HeaderTop>
     <!--首页导航-->
     <nav class="msite_nav">
       <div class="swiper-container">
@@ -129,24 +129,35 @@
         <span class="shop_header_title">附近商家</span>
       </div>
       <ShopList></ShopList>
-  
     </div>
   </section>
 </template>
 
 <script>
-import HeaderTop from "../../components/HeaderTop/HeaderTop.vue"
-import ShopList from "../../components/ShopList/ShopList.vue"
+import HeaderTop from "../../components/HeaderTop/HeaderTop.vue";
+import ShopList from "../../components/ShopList/ShopList.vue";
+import Swiper from "swiper/swiper-bundle.min.js";
+import "swiper/swiper-bundle.css";
 export default {
   name: "Msite",
-components:{
+  components: {
     HeaderTop,
-    ShopList
+    ShopList,
   },
   data() {
     return {
-      tit:"昌平区北七家宏福科技园(337省道北)"
+      tit: "昌平区北七家宏福科技园(337省道北)",
     };
+  },
+  mounted() {
+    new Swiper(".swiper-container", {
+      loop: true, // 循环模式选项
+      autoplay: true, //可选选项，自动滑动
+      // 如果需要分页器
+      pagination: {
+        el: ".swiper-pagination",
+      },
+    });
   },
 };
 </script>
