@@ -45,7 +45,7 @@
         <i class="iconfont icon-xuanxiang"></i>
         <span class="shop_header_title">附近商家</span>
       </div>
-      <ShopList></ShopList>
+      <ShopList :shops="shops"></ShopList>
     </div>
   </section>
 </template>
@@ -68,7 +68,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["address", "categorys"]),
+    ...mapState(["address", "categorys", "shops"]),
     categorysArr: {
       get() {
         let Arr = [];
@@ -86,16 +86,8 @@ export default {
       set() {},
     },
   },
-  methods: {
-    //获取食品分类数组函数
-    ...mapActions(["getFoodCategorys"]),
-  },
-  mounted() {
-    //调用获取食品分类数组函数
-    this.getFoodCategorys();
-  },
-
   watch: {
+    //监视categorys数据的变化
     categorys(newValue, oldValue) {
       //界面更新完毕立即调用this.$nextTtick(()=>{创建Swiper实例对象})
       this.$nextTick(() => {

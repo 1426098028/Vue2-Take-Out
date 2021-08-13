@@ -66,11 +66,28 @@ export default {
         let res = await reqFoodCategorys()
         if (res.code === 0) {
             Aoptions = res.data
-            console.log("------Actions--通过commit触发Mutauions--RECEIVE_ADDRESS------",)
+            console.log("------Actions--通过commit触发Mutauions--RECEIVE_CATEGORYS------",)
             commit(RECEIVE_CATEGORYS, Aoptions)
         }
-    }
+    },
 
 
     // 发送获取商家数组请求
+    async getShops({ commit }, Aoptions) {
+        let res = await reqShops({
+            params: {
+                latitude: 40.10038, // 纬度
+                longitude: 116.36867, // 经度
+            },
+            body: {
+                latitude: 40.10038, // 纬度
+                longitude: 116.36867, // 经度
+            },
+        })
+        if (res.code === 0) {
+            Aoptions = res.data
+            console.log("------Actions--通过commit触发Mutauions--RECEIVE_SHOPS------",)
+            commit(RECEIVE_SHOPS, Aoptions)
+        }
+    }
 }

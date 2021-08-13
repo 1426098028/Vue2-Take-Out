@@ -40,12 +40,16 @@ export default {
     //   })
   },
   methods: {
-    //获取定位
-    ...mapActions(["getAddres"]),
+    //获取定位   获取食品分类数组函数   获取商家数组请求
+    ...mapActions(["getAddres", "getFoodCategorys", "getShops"]),
   },
   mounted() {
     //调用获取定位
     this.getAddres();
+    //调用获取食品分类数组函数
+    this.getFoodCategorys();
+    //调用获取商家数组请求
+    this.getShops();
   },
 };
 </script>

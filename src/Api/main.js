@@ -9,16 +9,6 @@ export const reqAddres = (Geohash) => { return FlyAjaxPromise({ url: "/position/
 export const reqFoodCategorys = (FoodCategorys) => { return FlyAjaxPromise({ url: "/index_category", method: "get", ...FoodCategorys, }) }
 
 // // [3、根据经纬度获取商铺列表]
-// {
-//     params: { 
-//         latitude: 40.10038, // 纬度
-//         longitude: 116.36867, // 经度
-//       },
-//     body: { 
-//         latitude: 40.10038, // 纬度
-//         longitude: 116.36867, // 经度
-//     },
-// }
 export const reqShops = (ShopsLocation) => { return FlyAjaxPromise({ url: "/shops", method: "get", ...ShopsLocation, }) }
 
 // // [4、根据经纬度和关键字搜索商铺列表]
