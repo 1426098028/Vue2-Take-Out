@@ -40,7 +40,12 @@
               </button>
             </section>
             <section class="login_verification">
-              <input type="tel" maxlength="8" placeholder="验证码" />
+              <input
+                type="tel"
+                maxlength="8"
+                placeholder="验证码"
+                v-model="code"
+              />
             </section>
             <section class="login_hint">
               温馨提示：未注册硅谷外卖帐号的手机号，登录时将自动注册，且代表已同意
@@ -54,6 +59,7 @@
                   type="tel"
                   maxlength="11"
                   placeholder="手机/邮箱/用户名"
+                  v-model="name"
                 />
               </section>
               <section class="login_verification">
@@ -81,7 +87,12 @@
                 </div>
               </section>
               <section class="login_message">
-                <input type="text" maxlength="11" placeholder="验证码" />
+                <input
+                  type="text"
+                  maxlength="11"
+                  placeholder="验证码"
+                  v-model="captcha"
+                />
                 <img
                   class="get_verification"
                   src="../../../static/images/captcha.svg"
@@ -98,16 +109,22 @@
         <i class="iconfont icon-jiantou2"></i>
       </a>
     </div>
+
+    <AlertTip :alertText="alertText" v-show="alertShow" @closeTip="closeTip" />
   </section>
 </template>
 
 <script>
+import AlertTip from "../../components/AlertTip/AlertTip.vue";
 export default {
   name: "Login",
+  components: { AlertTip },
   data() {
     return {
       //手机号
       phone: "",
+      // 短信验证码
+      code: "",
       // true代表短信登陆, false代表密码
       LoginSwitch: false,
       //计算已发送多少秒
@@ -118,6 +135,12 @@ export default {
       name: "",
       // 密码
       pwd: "",
+      // 图形验证码
+      captcha: "",
+      // 提示文本
+      alertText: "",
+      // 是否显示警告框
+      alertShow: false,
     };
   },
   computed: {
@@ -148,7 +171,57 @@ export default {
       }
     },
     // 异步登陆
-    login() {},
+    login() {
+      // 前台表单验证
+      if (this.LoginSwitch) {
+        // 短信登陆
+        console.log("短信登陆");
+        if (!this.rightPhone) {
+          // 手机号不正确
+          this.showAlert("手机号不正确");
+          return false;
+        }
+        if (!/^\d{6}$/.test(this.code)) {
+          // 验证必须是6位数字
+          this.showAlert("验证必须是6位数字");
+          return false;
+        }
+        // 发送ajax请求短信登陆
+        return false;
+      }
+      if (!this.LoginSwitch) {
+        // 密码登陆
+        console.log("密码登录");
+        if (!this.name) {
+          this.showAlert("用户名不正确");
+          return false;
+        }
+        if (!this.pwd) {
+          this.showAlert("密码不正确");
+          return false;
+        }
+        if (!this.captcha) {
+          this.showAlert("验证码不正确");
+          return false;
+        }
+        // 发送ajax请求短信登陆
+        return false;
+      }
+    },
+    //显示表单信息错误提示
+    showAlert(Text) {
+      // 提示文本
+      this.alertText = Text;
+      // 显示警告框
+      this.alertShow = true;
+    },
+    //关闭表单信息错误提示
+    closeTip() {
+      // 提示文本
+      this.alertText = "";
+      // 关闭显示警告框
+      this.alertShow = false;
+    },
   },
 };
 </script>
