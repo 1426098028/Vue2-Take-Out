@@ -73,17 +73,23 @@ export const reqUserInfo = (UserInfo) => { return FlyAjaxPromise({ url: "/userin
 export const reqLogout = (Logout) => { return FlyAjaxPromise({ url: "/logout", method: "get", ...Logout }) }
 
 
-// /**
-//  * 获取商家信息
-//  */
-// export const reqShopInfo = () => ajax('/info')
 
-// /**
-//  * 获取商家评价数组
-//  */
-// export const reqShopRatings = () => ajax('/ratings')
 
-// /**
-//  * 获取商家商品数组
-//  */
-// export const reqShopGoods = () => ajax('/goods')
+
+
+// 使用Mock.js 模拟数据  进行Ajax请求拦截
+/**
+ * 获取商家信息
+ */
+export const reqShopInfo = (ShopInfo) => { return FlyAjaxPromise({ url: "/info", method: "get", ...ShopInfo }) }
+
+/**
+ * 获取商家评价数组
+ */
+export const reqShopRatings = (ShopRatings) => { return FlyAjaxPromise({ url: "/ratings", method: "get", ...ShopRatings }) }
+
+
+/**
+ * 获取商家商品数组
+ */
+export const reqShopGoods = (ShopGoods) => { return FlyAjaxPromise({ url: "/goods", method: "get", ...ShopGoods }) }
