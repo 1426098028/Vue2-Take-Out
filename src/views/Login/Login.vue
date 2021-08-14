@@ -93,11 +93,18 @@
                   placeholder="验证码"
                   v-model="captcha"
                 />
-                <img
+                <!-- <img
                   class="get_verification"
-                  src="../../../static/images/captcha.svg"
+                  src="http://localhost:4000/captcha"
                   alt="captcha"
-                />
+                  @click="getCaptcha"
+                  ref="captcha"
+                /> -->
+                <div
+                  @click="updateCode"
+                  class="get_verification"
+                  v-html="graphicalCode"
+                ></div>
               </section>
             </section>
           </div>
@@ -109,12 +116,12 @@
         <i class="iconfont icon-jiantou2"></i>
       </a>
     </div>
-
     <AlertTip :alertText="alertText" v-show="alertShow" @closeTip="closeTip" />
   </section>
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
 import AlertTip from "../../components/AlertTip/AlertTip.vue";
 export default {
   name: "Login",
@@ -144,6 +151,7 @@ export default {
     };
   },
   computed: {
+    ...mapState(["graphicalCode"]),
     rightPhone: {
       get() {
         return /^1\d{10}$/.test(this.phone);
@@ -153,8 +161,17 @@ export default {
   },
 
   created() {},
-
+  mounted() {
+    //调用获取图形验证码请求
+    // this.$store.dispatch("getCaptcha");
+    this.getCaptcha();
+  },
   methods: {
+    ...mapActions(["getCaptcha", "getSendCode"]),
+    // 更新图形验证码
+    updateCode() {
+      this.getCaptcha();
+    },
     // 异步获取短信验证码
     getCode() {
       if (this.Time === 0) {
@@ -166,8 +183,16 @@ export default {
             clearInterval(this.TimeId);
           }
         }, 1000);
-
         // 发送ajax请求(向指定手机号发送验证码短信)
+        console.log(typeof this.phone);
+        this.getSendCode({
+          params: {
+            phone: this.phone,
+          },
+          body: {
+            phone: this.phone,
+          },
+        });
       }
     },
     // 异步登陆

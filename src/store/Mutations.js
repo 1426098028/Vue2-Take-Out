@@ -28,7 +28,7 @@
 // 触发actions   任意.vue文件
 // this.$store.commit("mutations函数名", 有数据就填变量);
 
-import { RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS } from "./Mutation-types"
+import { RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS, RECEIVE_GRAPHICALCODE, RECEIVE_SENDCODE } from "./Mutation-types"
 export default {
 
     // 获取地址相关信息对象
@@ -53,7 +53,24 @@ export default {
         console.log(state)
         console.log(Moptions)
         state.shops = Moptions
+    },
+
+    //获取一次性图形验证码
+    [RECEIVE_GRAPHICALCODE](state, Moptions) {
+        console.log("------通过Actions获取到的数据------",)
+        console.log(state)
+        // console.log(Moptions)
+        state.graphicalCode = Moptions
+    },
+
+    // 获取手机短信验证码
+    [RECEIVE_SENDCODE](state, Moptions) {
+        console.log("------通过Actions获取到的数据------",)
+        console.log(state)
+        // console.log(Moptions)
+        state.SendCode = Moptions
     }
+
 
 
 }

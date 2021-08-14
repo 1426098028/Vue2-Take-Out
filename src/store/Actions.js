@@ -41,23 +41,22 @@ import {
     reqFoodCategorys,
     reqShops,
     reqSearchShop,
-    Onecode,
+    reqCaptcha,
     reqPwdLogin,
     reqSendCode,
     reqSmsLogin,
     reqUserInfo,
     reqLogout,
 } from "../Api/main.js";
-import { RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS } from "./Mutation-types"
+import { RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS, RECEIVE_GRAPHICALCODE, RECEIVE_SENDCODE } from "./Mutation-types"
 export default {
     // 发送获取地址相关信息对象请求
     async getAddres({ commit }, Aoptions) {
         let res = await reqAddres()
         console.log("获取数据", res)
         if (res.code === 0) {
-            Aoptions = res.data
             console.log("------Actions--通过commit触发Mutauions--RECEIVE_ADDRESS------",)
-            commit(RECEIVE_ADDRESS, Aoptions)
+            commit(RECEIVE_ADDRESS, res.data)
         }
     },
 
@@ -65,12 +64,10 @@ export default {
     async getFoodCategorys({ commit }, Aoptions) {
         let res = await reqFoodCategorys()
         if (res.code === 0) {
-            Aoptions = res.data
             console.log("------Actions--通过commit触发Mutauions--RECEIVE_CATEGORYS------",)
-            commit(RECEIVE_CATEGORYS, Aoptions)
+            commit(RECEIVE_CATEGORYS, res.data)
         }
     },
-
 
     // 发送获取商家数组请求
     async getShops({ commit }, Aoptions) {
@@ -85,9 +82,23 @@ export default {
             },
         })
         if (res.code === 0) {
-            Aoptions = res.data
             console.log("------Actions--通过commit触发Mutauions--RECEIVE_SHOPS------",)
-            commit(RECEIVE_SHOPS, Aoptions)
+            commit(RECEIVE_SHOPS, res.data)
         }
+    },
+
+    //发送获取一次性图形验证码请求
+    async getCaptcha({ commit }, Aoptions) {
+        let res = await reqCaptcha()
+        console.log("------Actions--通过commit触发Mutauions--RECEIVE_GRAPHICALCODE------",)
+        commit(RECEIVE_GRAPHICALCODE, res)
+    },
+
+    //发送获取手机短信验证码
+    async getSendCode({ commit }, Aoptions) {
+        alert("已关闭手机号获取验证码请求,请开启请求")
+        // let res = await reqSendCode(Aoptions)
+        console.log("------Actions--通过commit触发Mutauions--RECEIVE_SENDCODE------",)
+        commit(RECEIVE_SENDCODE, res)
     }
 }

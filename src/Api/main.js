@@ -25,8 +25,8 @@ export const reqShops = (ShopsLocation) => { return FlyAjaxPromise({ url: "/shop
 export const reqSearchShop = (SearchShop) => { return FlyAjaxPromise({ url: "/search_shops", method: "get", ...SearchShop }) }
 // export const reqSearchShop = (SearchShop) => { return FlyAjaxPromise({ url: "/search_shops", method: "get", params: { ...SearchShop }, body: { ...SearchShop } }) }
 
-// [5、获取一次性验证码]
-export const Onecode = (code) => { return FlyAjaxPromise({ url: "/captcha", method: "get", ...code }) }
+// [5、获取一次性图形验证码]
+export const reqCaptcha = (Captcha) => { return FlyAjaxPromise({ url: "/captcha", method: "get", ...Captcha }) }
 
 
 

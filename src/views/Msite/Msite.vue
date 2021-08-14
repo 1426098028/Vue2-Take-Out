@@ -67,6 +67,20 @@ export default {
       baseImageUrl: "https://fuss10.elemecdn.com",
     };
   },
+  mounted() {
+    this.$nextTick(() => {
+      console.log("mounted");
+      //轮播图
+      new Swiper(".swiper-container", {
+        loop: true, // 循环模式选项
+        autoplay: true, //可选选项，自动滑动
+        // 如果需要分页器
+        pagination: {
+          el: ".swiper-pagination",
+        },
+      });
+    });
+  },
   computed: {
     ...mapState(["address", "categorys", "shops"]),
     categorysArr: {
@@ -89,6 +103,7 @@ export default {
   watch: {
     //监视categorys数据的变化
     categorys(newValue, oldValue) {
+      console.log("watch");
       //界面更新完毕立即调用this.$nextTtick(()=>{创建Swiper实例对象})
       this.$nextTick(() => {
         //轮播图

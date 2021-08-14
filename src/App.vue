@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     //获取定位   获取食品分类数组函数   获取商家数组请求
-    ...mapActions(["getAddres", "getFoodCategorys", "getShops"]),
+    ...mapActions(["getAddres", "getFoodCategorys", "getShops", "getCaptcha"]),
   },
   mounted() {
     //调用获取定位

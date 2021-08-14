@@ -20,4 +20,10 @@ export const RECEIVE_CATEGORYS = "receive_categorys"
 //接收商家数组
 export const RECEIVE_SHOPS = "receive_shops"
 
+//接收一次性图形验证码
+export const RECEIVE_GRAPHICALCODE = "receive_graphicalCode"
+
+//接收手机短信验证码
+export const RECEIVE_SENDCODE = "receive_sendcode"
+
 
