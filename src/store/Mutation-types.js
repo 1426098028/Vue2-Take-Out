@@ -36,3 +36,21 @@ export const RECEIVE_SMSLOGIN = "receive_smslogin"
 export const RECEIVE_LOGOUT = "receive_logout"
 
 
+
+
+// 使用Mock.js 模拟数据  进行Ajax请求拦截  接口
+
+//接收获取商家信息
+export const RECEIVE_INFO = "receive_info"
+
+//接收获取商家评价数组
+export const RECEIVE_RATINGS = "receive_ratings"
+
+//接收获取商品列表
+export const RECEIVE_GOODS = "receive_goods"
+
+
+
+
+
+

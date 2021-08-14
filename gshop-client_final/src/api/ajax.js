@@ -3,7 +3,7 @@ ajax请求函数模块
 返回值: promise对象(异步返回的数据是: response.data)
  */
 import axios from 'axios'
-export default function ajax (url, data={}, type='GET') {
+export default function ajax(url, data = {}, type = 'GET') {
 
   return new Promise(function (resolve, reject) {
     // 执行异步ajax请求
@@ -33,6 +33,44 @@ export default function ajax (url, data={}, type='GET') {
     })
   })
 }
+
+
+
+
+// 添加请求拦截器
+axios.interceptors.request.use(function (config) {
+  // 在发送请求之前做些什么
+  console.log("请求拦截", config)
+
+
+
+  return config;
+}, function (error) {
+  console.log("请求拦截", error)
+
+  // 对请求错误做些什么
+  return Promise.reject(error);
+});
+
+// 添加响应拦截器
+axios.interceptors.response.use(function (response) {
+  // 对响应数据做点什么
+  console.log("响应拦截", response)
+
+  return response;
+}, function (error) {
+  console.log("响应拦截", error)
+
+  // 对响应错误做点什么
+  return Promise.reject(error);
+});
+
+
+
+
+
+
+
 
 /*
 const response = await ajax()

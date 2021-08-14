@@ -47,8 +47,15 @@ import {
     reqSmsLogin,
     reqUserInfo,
     reqLogout,
+    reqShopInfo,
+    reqShopRatings,
+    reqShopGoods,
+
+
+
+
 } from "../Api/main.js";
-import { RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS, RECEIVE_GRAPHICALCODE, RECEIVE_SENDCODE, RECEIVE_USERINFO, RECEIVE_LOGOUT } from "./Mutation-types"
+import { RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS, RECEIVE_GRAPHICALCODE, RECEIVE_SENDCODE, RECEIVE_USERINFO, RECEIVE_LOGOUT, RECEIVE_INFO, RECEIVE_RATINGS, RECEIVE_GOODS } from "./Mutation-types"
 export default {
     // 发送获取地址相关信息对象请求
     async getAddres({ commit }, Aoptions) {
@@ -126,10 +133,40 @@ export default {
     },
 
     //发送用户登出请求
-    async getLogout({commit},Aoptions) {
+    async getLogout({ commit }, Aoptions) {
         let res = await reqLogout()
         console.log("------Actions--通过commit触发Mutauions--RECEIVE_LOGOUT------",)
-        commit(RECEIVE_LOGOUT,res)
+        commit(RECEIVE_LOGOUT, res)
+    },
+
+    // 使用Mock.js 模拟数据  进行Ajax请求拦截  接口
+
+    //发送获取商家信息请求
+    async getShopInfo({ commit }, Aoptions) {
+        let res = await reqShopInfo()
+        console.log("商家信息", res)
+        if (res.code === 0) {
+            console.log("------Actions--通过commit触发Mutauions--RECEIVE_INFO------",)
+            commit(RECEIVE_INFO, res.data)
+        }
+    },
+
+    //发送获取商家评价数组请求
+    async getShopRatings({ commit }, Aoptions) {
+        let res = await reqShopRatings()
+        if (res.code === 0) {
+            console.log("------Actions--通过commit触发Mutauions--RECEIVE_RATINGS------",)
+            commit(RECEIVE_RATINGS, res.data)
+        }
+    },
+
+    //发送获取商品列表请求
+    async getShopGoods({ commit }, Aoptions) {
+        let res = await reqShopGoods()
+        if (res.code === 0) {
+            console.log("------Actions--通过commit触发Mutauions--RECEIVE_GOODS------",)
+            commit(RECEIVE_GOODS, res.data)
+        }
     }
 
 }

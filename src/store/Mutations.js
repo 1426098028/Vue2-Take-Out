@@ -28,7 +28,7 @@
 // 触发actions   任意.vue文件
 // this.$store.commit("mutations函数名", 有数据就填变量);
 
-import { RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS, RECEIVE_GRAPHICALCODE, RECEIVE_SENDCODE, RECEIVE_USERINFO, RECEIVE_LOGOUT } from "./Mutation-types"
+import { RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS, RECEIVE_GRAPHICALCODE, RECEIVE_SENDCODE, RECEIVE_USERINFO, RECEIVE_LOGOUT, RECEIVE_INFO, RECEIVE_RATINGS, RECEIVE_GOODS } from "./Mutation-types"
 export default {
 
     // 获取地址相关信息对象
@@ -81,7 +81,40 @@ export default {
 
     //获取用户退出信息
     [RECEIVE_LOGOUT](state, Moptions) {
+        console.log("------通过Actions获取到的数据------",)
+        console.log(state)
+        console.log(Moptions)
         state.userInfo = {}
+    },
+
+
+
+    // 使用Mock.js 模拟数据  进行Ajax请求拦截  接口
+
+    //获取商家信息
+    [RECEIVE_INFO](state, Moptions) {
+        console.log("------通过Actions获取到的数据------",)
+        console.log(state)
+        console.log(Moptions)
+        state.info = Moptions
+
+    },
+
+
+    //获取商家评价数组
+    [RECEIVE_RATINGS](state, Moptions) {
+        console.log("------通过Actions获取到的数据------",)
+        console.log(state)
+        console.log(Moptions)
+        state.ratings = Moptions
+    },
+
+    //获取商品列表
+    [RECEIVE_GOODS](state, Moptions) {
+        console.log("------通过Actions获取到的数据------",)
+        console.log(state)
+        console.log(Moptions)
+        state.goods = Moptions
     }
 
 }
