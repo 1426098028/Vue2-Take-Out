@@ -21,13 +21,7 @@
             </section>
             <section class="shop_rating_order">
               <section class="shop_rating_order_left">
-                <div class="star star-24">
-                  <span class="star-item on"></span>
-                  <span class="star-item on"></span>
-                  <span class="star-item on"></span>
-                  <span class="star-item half"></span>
-                  <span class="star-item off"></span>
-                </div>
+                <Star :score="shop.rating" :size="size"></Star>
                 <div class="rating_section">{{ shop.rating }}</div>
                 <div class="order_section">
                   月售{{ shop.recent_order_num }}单
@@ -53,6 +47,7 @@
   </div>
 </template>
 <script>
+import Star from "../Star/Star.vue";
 export default {
   name: "ShopList",
   props: {
@@ -61,9 +56,14 @@ export default {
       require: true,
     },
   },
+  components: {
+    Star,
+  },
   data() {
     return {
       baseImgUrl: "http://cangdu.org:8001/img/",
+      // 小星星大小
+      size: 24,
     };
   },
   mounted() {
@@ -72,6 +72,6 @@ export default {
 };
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
-@import "../../common/stylus/mixins.styl"
+@import '../../common/stylus/mixins.styl';
 @import './ShopList.styl';
 </style>
