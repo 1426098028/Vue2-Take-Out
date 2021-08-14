@@ -8,9 +8,13 @@
         </span>
       </template>
       <template v-slot:Right>
-        <span class="header_login">
-          <span class="header_login_text">登录|注册</span>
-        </span>
+        <router-link
+          class="header_login"
+          :to="userInfo.code === 0 ? '/profile' : '/Login'"
+        >
+          <i class="iconfont icon-person" v-if="userInfo.code === 0"></i>
+          <span class="header_login_text" v-else>登录|注册</span>
+        </router-link>
       </template>
     </HeaderTop>
     <!--首页导航-->
@@ -82,7 +86,7 @@ export default {
     });
   },
   computed: {
-    ...mapState(["address", "categorys", "shops"]),
+    ...mapState(["address", "categorys", "shops", "userInfo"]),
     categorysArr: {
       get() {
         let Arr = [];

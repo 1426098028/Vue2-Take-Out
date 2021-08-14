@@ -48,7 +48,7 @@ import {
     reqUserInfo,
     reqLogout,
 } from "../Api/main.js";
-import { RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS, RECEIVE_GRAPHICALCODE, RECEIVE_SENDCODE } from "./Mutation-types"
+import { RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS, RECEIVE_GRAPHICALCODE, RECEIVE_SENDCODE, RECEIVE_USERINFO, RECEIVE_LOGOUT } from "./Mutation-types"
 export default {
     // 发送获取地址相关信息对象请求
     async getAddres({ commit }, Aoptions) {
@@ -96,9 +96,40 @@ export default {
 
     //发送获取手机短信验证码
     async getSendCode({ commit }, Aoptions) {
-        alert("已关闭手机号获取验证码请求,请开启请求")
-        // let res = await reqSendCode(Aoptions)
+        // alert("已关闭手机号获取验证码请求,请开启请求")
+        let res = await reqSendCode(Aoptions)
         console.log("------Actions--通过commit触发Mutauions--RECEIVE_SENDCODE------",)
         commit(RECEIVE_SENDCODE, res)
+    },
+
+    //发送账号密码登录请求
+    async getPwdLogin({ commit }, Aoptions) {
+        let res = await reqPwdLogin(Aoptions)
+        console.log("------Actions--通过commit触发Mutauions--RECEIVE_USERINFO------",)
+        console.log(res)
+        commit(RECEIVE_USERINFO, res)
+    },
+
+    // 发送手机号验证码登陆请求
+    async getSmsLogin({ commit }, Aoptions) {
+        let res = await reqSmsLogin(Aoptions)
+        console.log("------Actions--通过commit触发Mutauions--RECEIVE_USERINFO------",)
+        console.log(res)
+        commit(RECEIVE_USERINFO, res)
+    },
+
+    // 根据会话获取用户信息请求
+    async getUserInfo({ commit }, Aoptions) {
+        let res = await reqUserInfo()
+        console.log("------Actions--通过commit触发Mutauions--RECEIVE_USERINFO------",)
+        commit(RECEIVE_USERINFO, res)
+    },
+
+    //发送用户登出请求
+    async getLogout({commit},Aoptions) {
+        let res = await reqLogout()
+        console.log("------Actions--通过commit触发Mutauions--RECEIVE_LOGOUT------",)
+        commit(RECEIVE_LOGOUT,res)
     }
+
 }

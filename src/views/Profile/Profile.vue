@@ -1,27 +1,36 @@
 <template>
   <section class="profile">
- 
-<HeaderTop :tit="tit"></HeaderTop>
+    <HeaderTop :tit="tit"></HeaderTop>
 
     <section class="profile-number">
-
-<router-link to="/Login" class="profile-link">
-     <div class="profile_image">
+      <router-link
+        :to="userInfo.code === 0 ? '' : '/Login'"
+        class="profile-link"
+      >
+        <div class="profile_image">
           <i class="iconfont icon-person"></i>
         </div>
         <div class="user-info">
-          <p class="user-info-top">登录/注册</p>
+          <p class="user-info-top" v-if="!userInfo.phone">
+            {{ userInfo.code === 0 ? userInfo.data.name : "登录/注册" }}
+          </p>
           <p>
             <span class="user-icon">
               <i class="iconfont icon-shouji icon-mobile"></i>
             </span>
-            <span class="icon-mobile-number">暂无绑定手机号</span>
+            <span class="icon-mobile-number">
+              {{
+                userInfo.code === 0
+                  ? userInfo.data.phone || "暂无绑定手机号"
+                  : "暂无绑定手机号"
+              }}
+            </span>
           </p>
         </div>
         <span class="arrow">
           <i class="iconfont icon-jiantou1"></i>
         </span>
-</router-link>
+      </router-link>
     </section>
     <section class="profile_info_data border-1px">
       <ul class="info_data_list">
@@ -91,21 +100,39 @@
         </div>
       </a>
     </section>
+    <section class="profile_my_order border-1px">
+      <button class="profile_but" v-if="userInfo.code === 0" @click="logout">
+        退出登陆
+      </button>
+    </section>
   </section>
 </template>
 
 <script>
-import HeaderTop from "../../components/HeaderTop/HeaderTop.vue"
+import { mapActions, mapState } from "vuex";
+
+import HeaderTop from "../../components/HeaderTop/HeaderTop.vue";
 
 export default {
   name: "Profile",
-  components:{
-    HeaderTop
+  components: {
+    HeaderTop,
   },
   data() {
     return {
-      tit:"我的"
+      tit: "我的",
     };
+  },
+  computed: {
+    ...mapState(["userInfo"]),
+  },
+
+  methods: {
+    ...mapActions(["getLogout"]),
+    async logout() {
+      await this.getLogout();
+      await console.log("退出成功");
+    },
   },
 };
 </script>
@@ -113,4 +140,11 @@ export default {
 <style lang="stylus" rel="stylesheet/stylus">
 @import '../../common/stylus/mixins.styl';
 @import './Profile.styl';
+
+.profile_but {
+  width: 100%;
+  height: 50px;
+  background-color: red;
+  border: none;
+}
 </style>

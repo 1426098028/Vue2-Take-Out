@@ -26,4 +26,13 @@ export const RECEIVE_GRAPHICALCODE = "receive_graphicalCode"
 //接收手机短信验证码
 export const RECEIVE_SENDCODE = "receive_sendcode"
 
+//接收用户信息
+export const RECEIVE_USERINFO = "receive_userinfo"
+
+//手机号验证码登陆
+export const RECEIVE_SMSLOGIN = "receive_smslogin"
+
+//发送用户登出请求
+export const RECEIVE_LOGOUT = "receive_logout"
+
 

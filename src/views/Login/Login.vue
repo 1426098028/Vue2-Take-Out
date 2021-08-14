@@ -151,7 +151,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["graphicalCode"]),
+    ...mapState(["graphicalCode", "userInfo"]),
     rightPhone: {
       get() {
         return /^1\d{10}$/.test(this.phone);
@@ -167,13 +167,13 @@ export default {
     this.getCaptcha();
   },
   methods: {
-    ...mapActions(["getCaptcha", "getSendCode"]),
+    ...mapActions(["getCaptcha", "getSendCode", "getPwdLogin", "getSmsLogin"]),
     // 更新图形验证码
     updateCode() {
       this.getCaptcha();
     },
     // 异步获取短信验证码
-    getCode() {
+    async getCode() {
       if (this.Time === 0) {
         this.Time = 30;
         this.TimeId = setInterval(() => {
@@ -185,7 +185,7 @@ export default {
         }, 1000);
         // 发送ajax请求(向指定手机号发送验证码短信)
         console.log(typeof this.phone);
-        this.getSendCode({
+        await this.getSendCode({
           params: {
             phone: this.phone,
           },
@@ -196,7 +196,7 @@ export default {
       }
     },
     // 异步登陆
-    login() {
+    async login() {
       // 前台表单验证
       if (this.LoginSwitch) {
         // 短信登陆
@@ -212,6 +212,17 @@ export default {
           return false;
         }
         // 发送ajax请求短信登陆
+        await this.getSmsLogin({
+          params: {
+            phone: this.phone,
+            code: this.code,
+          },
+          body: {
+            phone: this.phone,
+            code: this.code,
+          },
+        });
+        await this.loginInformation();
         return false;
       }
       if (!this.LoginSwitch) {
@@ -229,8 +240,40 @@ export default {
           this.showAlert("验证码不正确");
           return false;
         }
-        // 发送ajax请求短信登陆
+        // 发送ajax请求账号密码登陆
+        await this.getPwdLogin({
+          params: {
+            name: this.name,
+            pwd: this.pwd,
+            captcha: this.captcha,
+          },
+          body: {
+            name: this.name,
+            pwd: this.pwd,
+            captcha: this.captcha,
+          },
+        });
+        await this.loginInformation();
+        await this.updateCode();
         return false;
+      }
+    },
+
+    //提示登录信息
+    loginInformation() {
+      if (this.userInfo.code != 0) {
+        this.showAlert(this.userInfo.msg);
+        return false;
+      }
+      // this.showAlert("登录成功");
+      this.$router.replace("/profile");
+    },
+    //重置短信倒计时
+    clearTime() {
+      if (this.Time !== 0) {
+        this.Time = 0;
+        clearInterval(this.TimeId);
+        this.TimeId = undefined;
       }
     },
     //显示表单信息错误提示
