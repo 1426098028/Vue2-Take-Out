@@ -23,6 +23,11 @@ abc
 ```
 npm install mockjs
 ```
+## 安装Axios 
+
+```
+npm install axios
+```
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
