@@ -90,7 +90,7 @@ export const reqShopInfo = () => {
             url: "/info",
         });
         RequestResults.then((res) => {
-            console.log("请求Asiox成功---------------", res)
+            console.log("请求Asiox成功---------------", res.data)
             resolve(res.data)
         })
         RequestResults.catch((err) => {

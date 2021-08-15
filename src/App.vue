@@ -62,9 +62,9 @@ export default {
     //调用根据会话获取用户信息
     this.getUserInfo();
 
-    this.getShopInfo();
-    this.getShopRatings();
-    this.getShopGoods();
+    // this.getShopInfo();
+    // this.getShopRatings();
+    // this.getShopGoods();
   },
 };
 </script>
