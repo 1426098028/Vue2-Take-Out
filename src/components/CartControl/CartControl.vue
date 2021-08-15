@@ -1,6 +1,10 @@
-
 <template>
   <div class="cartcontrol">
+    <div class="iconfont icon-remove_circle_outline"></div>
+    <div class="cart-count">1</div>
+    <div class="iconfont icon-add_circle"></div>
+  </div>
+  <!-- <div class="cartcontrol">
     <transition name="move">
       <div
         class="iconfont icon-remove_circle_outline"
@@ -13,7 +17,7 @@
       class="iconfont icon-add_circle"
       @click.stop="updateFoodCount(true)"
     ></div>
-  </div>
+  </div> -->
 </template>
 
 <script>
