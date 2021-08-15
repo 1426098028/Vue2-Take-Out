@@ -165,7 +165,7 @@ export default {
         let res = await reqShopGoods()
         if (res.code === 0) {
             console.log("------Actions--通过commit触发Mutauions--RECEIVE_GOODS------",)
-            commit(RECEIVE_GOODS, res.data)
+            commit(RECEIVE_GOODS, res)
         }
     }
 

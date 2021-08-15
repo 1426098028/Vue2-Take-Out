@@ -1,15 +1,16 @@
 import FlyAjaxPromise from './FlyAjaxPromise'
 
+import axios from 'axios'
+
 const AjaxUrl = '/api'
 
 // [1、根据经纬度获取位置详情]
-
 export const reqAddres = (Geohash) => { return FlyAjaxPromise({ url: `${AjaxUrl}/position/40.10038,116.36867`, method: "get", ...Geohash, }) }
 
 // [2、获取食品分类列表]
 export const reqFoodCategorys = (FoodCategorys) => { return FlyAjaxPromise({ url: `${AjaxUrl}/index_category`, method: "get", ...FoodCategorys, }) }
 
-// // [3、根据经纬度获取商铺列表]
+// [3、根据经纬度获取商铺列表]
 export const reqShops = (ShopsLocation) => { return FlyAjaxPromise({ url: `${AjaxUrl}/shops`, method: "get", ...ShopsLocation, }) }
 
 // // [4、根据经纬度和关键字搜索商铺列表]
@@ -28,8 +29,6 @@ export const reqSearchShop = (SearchShop) => { return FlyAjaxPromise({ url: `${A
 
 // [5、获取一次性图形验证码]
 export const reqCaptcha = (Captcha) => { return FlyAjaxPromise({ url: `${AjaxUrl}/captcha`, method: "get", ...Captcha }) }
-
-
 
 // [6、用户名密码登陆]
 // export const reqPwdLogin = ({ name, pwd, captcha }) => ajax(BASE_URL + '/login_pwd', { name, pwd, captcha }, 'POST')
@@ -78,19 +77,71 @@ export const reqLogout = (Logout) => { return FlyAjaxPromise({ url: `${AjaxUrl}/
 
 
 
-// 使用Mock.js 模拟数据  进行Ajax请求拦截
+// 使用Mock.js 模拟数据  进行Ajax请求拦截    Mock.js好像不支持Flyio请求   这里使用Axios发送请求
 /**
  * 获取商家信息
  */
-export const reqShopInfo = (ShopInfo) => { return FlyAjaxPromise({ url: "/info", method: "get", ...ShopInfo }) }
+// export const reqShopInfo = (ShopInfo) => { return FlyAjaxPromise({ url: "/info", method: "get", ...ShopInfo }) }
+export const reqShopInfo = () => {
+    let RequestResults
+    return new Promise((resolve, reject) => {
+        RequestResults = axios({
+            method: "get",
+            url: "/info",
+        });
+        RequestResults.then((res) => {
+            console.log("请求Asiox成功---------------", res)
+            resolve(res.data)
+        })
+        RequestResults.catch((err) => {
+            console.log("请求Asios失败--------------", err)
+            reject(err)
+        })
+    });
+}
 
 /**
  * 获取商家评价数组
  */
-export const reqShopRatings = (ShopRatings) => { return FlyAjaxPromise({ url: "/ratings", method: "get", ...ShopRatings }) }
-
+// export const reqShopRatings = (ShopRatings) => { return FlyAjaxPromise({ url: "/ratings", method: "get", ...ShopRatings }) }
+export const reqShopRatings = () => {
+    let RequestResults
+    return new Promise((resolve, reject) => {
+        RequestResults = axios({
+            method: "get",
+            url: "/ratings",
+        });
+        RequestResults.then((res) => {
+            console.log("请求Asiox成功---------------", res)
+            resolve(res.data)
+        })
+        RequestResults.catch((err) => {
+            console.log("请求Asios失败--------------", err)
+            reject(err)
+        })
+    });
+}
 
 /**
  * 获取商家商品数组
  */
-export const reqShopGoods = (ShopGoods) => { return FlyAjaxPromise({ url: "/goods", method: "get", ...ShopGoods }) }
+// export const reqShopGoods = (ShopGoods) => { return FlyAjaxPromise({ url: "/goods", method: "get", ...ShopGoods }) }
+export const reqShopGoods = () => {
+    let RequestResults
+    return new Promise((resolve, reject) => {
+        RequestResults = axios({
+            method: "get",
+            url: "/goods",
+        });
+        RequestResults.then((res) => {
+            console.log("请求Asiox成功---------------", res)
+            resolve(res.data)
+        })
+        RequestResults.catch((err) => {
+            console.log("请求Asios失败--------------", err)
+            reject(err)
+        })
+    });
+}
+
+

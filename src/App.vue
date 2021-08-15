@@ -5,7 +5,6 @@
   </div>
 </template>
 <script>
-import { reqShopInfo } from "./Api/main";
 import { mapActions } from "vuex";
 import FooterGuide from "./components/FooterGuide/FooterGuide.vue";
 export default {
@@ -63,10 +62,9 @@ export default {
     //调用根据会话获取用户信息
     this.getUserInfo();
 
-    // this.getShopInfo();
-    // this.getShopRatings();
-    // this.getShopGoods();
-    console.log("11111111111111111111111111", reqShopInfo());
+    this.getShopInfo();
+    this.getShopRatings();
+    this.getShopGoods();
   },
 };
 </script>
