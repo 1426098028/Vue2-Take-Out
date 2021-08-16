@@ -48,10 +48,10 @@
     <div class="list-mask" v-show="listShow" @click="toggleShow"></div>
   </div>
 </template>
+
 <script>
-// import { MessageBox } from "mint-ui";
 import BScroll from "better-scroll";
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 import CartControl from "../CartControl/CartControl.vue";
 
 export default {
@@ -65,20 +65,17 @@ export default {
     ...mapState(["cartFoods", "info"]),
     ...mapGetters(["totalCount", "totalPrice"]),
     payClass() {
-      const { totalPrice } = this;
-      const { minPrice } = this.info;
-
-      return totalPrice >= minPrice ? "enough" : "not-enough";
+      return this.totalPrice >= this.info.minPrice ? "enough" : "not-enough";
     },
     payText() {
-      const { totalPrice } = this;
-      const { minPrice } = this.info;
-      if (totalPrice === 0) {
-        return `￥${minPrice}元起送`;
-      } else if (totalPrice < minPrice) {
-        return `还差￥${minPrice - totalPrice}元起送`;
-      } else {
-        return "结算";
+      if (this.totalPrice === 0) {
+        return `￥${this.info.minPrice}元起送`;
+      }
+      if (this.totalPrice <= this.info.minPrice) {
+        return `还差￥${this.info.minPrice - this.totalPrice}元起送`;
+      }
+      if (this.totalPrice >= this.info.minPrice) {
+        return `结算`;
       }
     },
 
@@ -97,6 +94,7 @@ export default {
               click: true,
             });
           } else {
+            // refresh是better-scroll中一个Api方法
             this.scroll.refresh(); // 让滚动条刷新一下: 重新统计内容的高度
           }
         });
@@ -107,6 +105,7 @@ export default {
   },
 
   methods: {
+    ...mapActions(["ClearCart"]),
     toggleShow() {
       // 只有当总数量大于0时切换
       if (this.totalCount > 0) {
@@ -115,12 +114,11 @@ export default {
     },
 
     clearCart() {
-      // MessageBox.confirm("确定清空购物车吗?").then(
-      //   (action) => {
-      //     this.$store.dispatch("clearCart");
-      //   },
-      //   () => {}
-      // );
+      if (confirm("确定清空购物车吗?")) {
+        // this.$store.dispatch("clearCart");
+        this.ClearCart();
+        console.log("清空");
+      }
     },
   },
   components: {

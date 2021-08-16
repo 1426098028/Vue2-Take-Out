@@ -59,23 +59,20 @@
     computed: {
       ...mapState(['cartFoods', 'info']),
       ...mapGetters(['totalCount', 'totalPrice']),
-      payClass () {
-        const {totalPrice} = this
-        const {minPrice} = this.info
-
-        return totalPrice>=minPrice ? 'enough' : 'not-enough'
-      },
-      payText () {
-        const {totalPrice} = this
-        const {minPrice} = this.info
-        if(totalPrice===0) {
-          return `￥${minPrice}元起送`
-        } else if(totalPrice<minPrice) {
-          return `还差￥${minPrice-totalPrice}元起送`
-        } else {
-          return '结算'
-        }
-      },
+       payClass() {
+      return this.totalPrice >= this.info.minPrice ? "enough" : "not-enough";
+    },
+    payText() {
+      if (this.totalPrice === 0) {
+        return `￥${this.info.minPrice}元起送`;
+      }
+      if (this.totalPrice <= this.info.minPrice) {
+        return `还差￥${this.info.minPrice - this.totalPrice}元起送`;
+      }
+      if (this.totalPrice >= this.info.minPrice) {
+        return `结算`;
+      }
+    },
 
       listShow () {
         // 如果总数量为0, 直接不显示

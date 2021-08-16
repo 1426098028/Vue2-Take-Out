@@ -55,7 +55,7 @@ import {
 
 
 } from "../Api/main.js";
-import { RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS, RECEIVE_GRAPHICALCODE, RECEIVE_SENDCODE, RECEIVE_USERINFO, RECEIVE_LOGOUT, RECEIVE_INFO, RECEIVE_RATINGS, RECEIVE_GOODS, INCREASE_FOOD_COUNT, DECREASE_FOOD_COUNT } from "./Mutation-types"
+import { RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS, RECEIVE_GRAPHICALCODE, RECEIVE_SENDCODE, RECEIVE_USERINFO, RECEIVE_LOGOUT, RECEIVE_INFO, RECEIVE_RATINGS, RECEIVE_GOODS, INCREASE_FOOD_COUNT, DECREASE_FOOD_COUNT, CLEAR_CART } from "./Mutation-types"
 export default {
     // 发送获取地址相关信息对象请求
     async getAddres({ commit }, Aoptions) {
@@ -184,11 +184,13 @@ export default {
         }
 
 
+    },
+
+
+    //清除购物车
+    ClearCart({ commit }, Aoptions) {
+        commit(CLEAR_CART)
     }
-
-
-
-
 
 
 }

@@ -20,7 +20,6 @@
           </li>
         </ul>
       </div>
-
       <!-- 右边 -->
       <div class="foods-wrapper">
         <ul>
@@ -62,49 +61,10 @@
           </li>
         </ul>
       </div>
+      <!-- 已选择 -->
+      <ShopCart />
     </div>
     <Food :food="food" ref="food" />
-    <!-- 已选择 -->
-
-    <div class="shopcart">
-      <div class="content">
-        <div class="content-left">
-          <div class="logo-wrapper">
-            <div class="logo highlight">
-              <i class="iconfont icon-shopping_cart highlight"></i>
-            </div>
-            <div class="num">1</div>
-          </div>
-          <div class="price highlight">￥12</div>
-          <div class="desc">另需配送费￥4元</div>
-        </div>
-        <div class="content-right">
-          <div class="pay not-enough">还差￥8元起送</div>
-        </div>
-      </div>
-      <!-- 显示以添加列表 -->
-      <div class="shopcart-list" style="display: none">
-        <div class="list-header">
-          <h1 class="title">购物车</h1>
-          <span class="empty">清空</span>
-        </div>
-        <div class="list-content">
-          <ul>
-            <li class="food">
-              <span class="name">红豆薏米美肤粥</span>
-              <div class="price">
-                <span>￥12</span>
-              </div>
-              <div class="cartcontrol-wrapper">
-                <CartControl />
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <!-- 遮罩层 -->
-    <div class="list-mask" style="display: none"></div>
   </div>
 </template>
 <script>

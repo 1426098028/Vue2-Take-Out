@@ -57,6 +57,9 @@ export const INCREASE_FOOD_COUNT = "increase_food_count"
 //减少已选中的商品数量   --同步
 export const DECREASE_FOOD_COUNT = "decrease_food_count"
 
+//清楚购物车   --同步
+export const CLEAR_CART = "clear_cart"
+
 
 
 
