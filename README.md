@@ -15,5 +15,19 @@ npm run serve
 npm run build
 ```
 
+## 账号密码
+abc
+123
+## 安装 mockjs 模拟数据
+
+```
+npm install mockjs
+```
+## 安装Axios 
+
+```
+npm install axios
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
