@@ -55,7 +55,7 @@ import {
 
 
 } from "../Api/main.js";
-import { RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS, RECEIVE_GRAPHICALCODE, RECEIVE_SENDCODE, RECEIVE_USERINFO, RECEIVE_LOGOUT, RECEIVE_INFO, RECEIVE_RATINGS, RECEIVE_GOODS } from "./Mutation-types"
+import { RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS, RECEIVE_GRAPHICALCODE, RECEIVE_SENDCODE, RECEIVE_USERINFO, RECEIVE_LOGOUT, RECEIVE_INFO, RECEIVE_RATINGS, RECEIVE_GOODS, INCREASE_FOOD_COUNT, DECREASE_FOOD_COUNT } from "./Mutation-types"
 export default {
     // 发送获取地址相关信息对象请求
     async getAddres({ commit }, Aoptions) {
@@ -167,6 +167,28 @@ export default {
             console.log("------Actions--通过commit触发Mutauions--RECEIVE_GOODS------",)
             commit(RECEIVE_GOODS, res.data)
         }
+    },
+
+    //同步更新已选中的商品数量
+    UpdateFoodCount({ commit }, Aoptions) {
+        console.log(Aoptions)
+        //增加已选中的商品数量   --同步
+        if (Aoptions.IsUpdate) {
+            commit(INCREASE_FOOD_COUNT, Aoptions)
+            return false
+        }
+        //减少已选中的商品数量   --同步
+        if (!Aoptions.IsUpdate) {
+            commit(DECREASE_FOOD_COUNT, Aoptions)
+            return false
+        }
+
+
     }
+
+
+
+
+
 
 }

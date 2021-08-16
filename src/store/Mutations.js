@@ -27,8 +27,8 @@
 
 // 触发actions   任意.vue文件
 // this.$store.commit("mutations函数名", 有数据就填变量);
-
-import { RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS, RECEIVE_GRAPHICALCODE, RECEIVE_SENDCODE, RECEIVE_USERINFO, RECEIVE_LOGOUT, RECEIVE_INFO, RECEIVE_RATINGS, RECEIVE_GOODS } from "./Mutation-types"
+import Vue from 'vue'
+import { RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS, RECEIVE_GRAPHICALCODE, RECEIVE_SENDCODE, RECEIVE_USERINFO, RECEIVE_LOGOUT, RECEIVE_INFO, RECEIVE_RATINGS, RECEIVE_GOODS, INCREASE_FOOD_COUNT, DECREASE_FOOD_COUNT } from "./Mutation-types"
 export default {
 
     // 获取地址相关信息对象
@@ -115,6 +115,47 @@ export default {
         console.log(state)
         console.log(Moptions)
         state.goods = Moptions
+    },
+
+
+
+
+
+    //增加已选中的商品数量   --同步
+    [INCREASE_FOOD_COUNT](state, Moptions) {
+        console.log("------通过Actions获取到的数据------",)
+        console.log(state)
+        console.log(Moptions)
+        if (!Moptions.food.count) {
+            // Moptions.food.count = 1
+            Vue.set(Moptions.food, "count", 1)
+            return false
+        }
+        Moptions.food.count++
+    },
+
+    //减少已选中的商品数量   --同步
+    [DECREASE_FOOD_COUNT](state, Moptions) {
+        console.log("------通过Actions获取到的数据------",)
+        console.log(state)
+        console.log(Moptions)
+        if (Moptions.food.count) {
+            Moptions.food.count--
+        }
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

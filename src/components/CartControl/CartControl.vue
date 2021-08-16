@@ -1,34 +1,31 @@
 <template>
   <div class="cartcontrol">
-    <div class="iconfont icon-remove_circle_outline"></div>
-    <div class="cart-count">1</div>
-    <div class="iconfont icon-add_circle"></div>
-  </div>
-  <!-- <div class="cartcontrol">
     <transition name="move">
       <div
         class="iconfont icon-remove_circle_outline"
         v-if="food.count"
-        @click.stop="updateFoodCount(false)"
+        @click.stop="UpdateFood(false)"
       ></div>
     </transition>
     <div class="cart-count" v-if="food.count">{{ food.count }}</div>
-    <div
-      class="iconfont icon-add_circle"
-      @click.stop="updateFoodCount(true)"
-    ></div>
-  </div> -->
+    <div class="iconfont icon-add_circle" @click.stop="UpdateFood(true)"></div>
+  </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "CartControl",
   props: {
     food: Object,
   },
+  data() {
+    return {};
+  },
   methods: {
-    updateFoodCount(isAdd) {
-      this.$store.dispatch("updateFoodCount", { isAdd, food: this.food });
+    ...mapActions(["UpdateFoodCount"]),
+    UpdateFood(IsUpdate) {
+      this.UpdateFoodCount({ IsUpdate, food: this.food });
     },
   },
 };

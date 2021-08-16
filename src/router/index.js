@@ -1,4 +1,5 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 import Msite from "../views/Msite/Msite.vue"//首页    --一级路由
 import Search from "../views/Search/Search.vue"//搜索   --一级路由
 import Order from "../views/Order/Order.vue"//订单    --一级路由
@@ -10,9 +11,7 @@ import ShopGoods from "../views/Shop/ShopGoods/ShopGoods.vue"//食品商家商�
 import ShopInfo from "../views/Shop/ShopInfo/ShopInfo.vue"//食品商家信息    --二级路由
 import ShopRatings from "../views/Shop/ShopRatings/ShopRatings.vue"//食品商家评分    --二级路由
 
-
-
-
+Vue.use(VueRouter)
 
 const routes = [
   {
@@ -85,16 +84,11 @@ const routes = [
     path: "/",
     redirect: "/Msite"
   },
-
 ]
-
-const router = createRouter({
-  history: createWebHashHistory(process.env.BASE_URL),
+const router = new VueRouter({
+  // mode: 'history',
+  base: process.env.BASE_URL,
   routes
 })
 
 export default router
-
-
-
-

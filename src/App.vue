@@ -61,7 +61,6 @@ export default {
     this.getShops();
     //调用根据会话获取用户信息
     this.getUserInfo();
-
     // this.getShopInfo();
     // this.getShopRatings();
     // this.getShopGoods();

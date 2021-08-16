@@ -35,6 +35,7 @@
                 class="food-item bottom-border-1px"
                 v-for="(food, index) in good.foods"
                 :key="index"
+                @click="details(food)"
               >
                 <div class="icon">
                   <img width="57" height="57" :src="food.icon" />
@@ -54,36 +55,6 @@
                   </div>
                   <div class="cartcontrol-wrapper">
                     <CartControl :food="food" />
-
-
-                
-                  </div>
-                </div>
-              </li>
-              <li class="food-item bottom-border-1px">
-                <div class="icon">
-                  <img
-                    width="57"
-                    height="57"
-                    src="http://fuss10.elemecdn.com/8/a6/453f65f16b1391942af11511b7a90jpeg.jpeg?imageView2/1/w/114/h/114"
-                  />
-                </div>
-                <div class="content">
-                  <h2 class="name">南瓜粥</h2>
-                  <p class="desc">甜粥</p>
-                  <div class="extra">
-                    <span class="count">月售91份</span> <span>好评率100%</span>
-                  </div>
-                  <div class="price">
-                    <span class="now">￥9</span>
-                    <!---->
-                  </div>
-                  <div class="cartcontrol-wrapper">
-                    <div class="cartcontrol">
-                      <!---->
-                      <!---->
-                      <div class="iconfont icon-add_circle"></div>
-                    </div>
                   </div>
                 </div>
               </li>
@@ -92,7 +63,7 @@
         </ul>
       </div>
     </div>
-
+    <Food :food="food" ref="food" />
     <!-- 已选择 -->
 
     <div class="shopcart">
@@ -125,11 +96,7 @@
                 <span>￥12</span>
               </div>
               <div class="cartcontrol-wrapper">
-                <div class="cartcontrol">
-                  <div class="iconfont icon-remove_circle_outline"></div>
-                  <div class="cart-count">1</div>
-                  <div class="iconfont icon-add_circle"></div>
-                </div>
+                <CartControl />
               </div>
             </li>
           </ul>
@@ -140,11 +107,10 @@
     <div class="list-mask" style="display: none"></div>
   </div>
 </template>
-
 <script>
 import { mapActions, mapState } from "vuex";
 import BScroll from "better-scroll";
-
+// 计算已选择的商品数量
 import CartControl from "../../../components/CartControl/CartControl.vue";
 import Food from "../../../components/Food/Food.vue";
 import ShopCart from "../../../components/ShopCart/ShopCart.vue";
@@ -227,6 +193,13 @@ export default {
       this.scrollY = scrollY;
       // 平滑滑动右侧列表
       this.RightBScroll.scrollTo(0, -scrollY, 300);
+    },
+
+    details(food) {
+      console.log(this.food);
+      this.food = food;
+      console.log(this.$refs.food);
+      this.$refs.food.IsShow();
     },
   },
 
