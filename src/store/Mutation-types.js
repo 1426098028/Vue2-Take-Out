@@ -35,6 +35,8 @@ export const RECEIVE_SMSLOGIN = "receive_smslogin"
 //发送用户登出请求
 export const RECEIVE_LOGOUT = "receive_logout"
 
+// 接收搜索的商家数组
+export const RECEIVE_SEARCH_SHOPS = 'receive_search_shops'
 
 
 
@@ -48,8 +50,6 @@ export const RECEIVE_RATINGS = "receive_ratings"
 
 //接收获取商品列表
 export const RECEIVE_GOODS = "receive_goods"
-
-
 
 //增加已选中的商品数量   --同步
 export const INCREASE_FOOD_COUNT = "increase_food_count"

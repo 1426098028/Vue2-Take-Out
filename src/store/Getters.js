@@ -9,6 +9,11 @@ export default {
     //购物车总价格
     totalPrice(state) {
         return state.cartFoods.reduce((Price, food) => Price + food.count * food.price, 0)
+    },
+
+    //满意和不满意，全部的筛选
+    positiveSize(state) {
+        return state.ratings.reduce((Count, rating) => Count + (rating.rateType === 0 ? 1 : 0), 0)
     }
 
 }

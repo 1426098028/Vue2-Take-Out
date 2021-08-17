@@ -28,7 +28,7 @@
 // 触发actions   任意.vue文件
 // this.$store.commit("mutations函数名", 有数据就填变量);
 import Vue from 'vue'
-import { RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS, RECEIVE_GRAPHICALCODE, RECEIVE_SENDCODE, RECEIVE_USERINFO, RECEIVE_LOGOUT, RECEIVE_INFO, RECEIVE_RATINGS, RECEIVE_GOODS, INCREASE_FOOD_COUNT, DECREASE_FOOD_COUNT, CLEAR_CART } from "./Mutation-types"
+import { RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS, RECEIVE_GRAPHICALCODE, RECEIVE_SENDCODE, RECEIVE_USERINFO, RECEIVE_LOGOUT, RECEIVE_INFO, RECEIVE_RATINGS, RECEIVE_GOODS, INCREASE_FOOD_COUNT, DECREASE_FOOD_COUNT, CLEAR_CART, RECEIVE_SEARCH_SHOPS } from "./Mutation-types"
 export default {
 
     // 获取地址相关信息对象
@@ -85,6 +85,14 @@ export default {
         console.log(state)
         console.log(Moptions)
         state.userInfo = {}
+    },
+
+    // 获取搜索的商家内容
+    [RECEIVE_SEARCH_SHOPS](state, Moptions) {
+        console.log("------通过Actions获取到的数据------",)
+        console.log(state)
+        console.log(Moptions)
+        state.searchShops = Moptions
     },
 
 

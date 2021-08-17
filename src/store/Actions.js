@@ -55,7 +55,7 @@ import {
 
 
 } from "../Api/main.js";
-import { RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS, RECEIVE_GRAPHICALCODE, RECEIVE_SENDCODE, RECEIVE_USERINFO, RECEIVE_LOGOUT, RECEIVE_INFO, RECEIVE_RATINGS, RECEIVE_GOODS, INCREASE_FOOD_COUNT, DECREASE_FOOD_COUNT, CLEAR_CART } from "./Mutation-types"
+import { RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS, RECEIVE_GRAPHICALCODE, RECEIVE_SENDCODE, RECEIVE_USERINFO, RECEIVE_LOGOUT, RECEIVE_INFO, RECEIVE_RATINGS, RECEIVE_GOODS, INCREASE_FOOD_COUNT, DECREASE_FOOD_COUNT, CLEAR_CART, RECEIVE_SEARCH_SHOPS } from "./Mutation-types"
 export default {
     // 发送获取地址相关信息对象请求
     async getAddres({ commit }, Aoptions) {
@@ -168,6 +168,26 @@ export default {
             commit(RECEIVE_GOODS, res.data)
         }
     },
+
+    // 发送搜索的商家请求
+    async getSearchShop({ commit, state }, Aoptions) {
+        let res = await reqSearchShop({
+            params: {
+                geohash: `${state.latitude},${state.longitude}`,
+                keyword: Aoptions,
+            },
+            body: {
+                geohash: `${state.latitude},${state.longitude}`,
+                keyword: Aoptions,
+            },
+        })
+        commit(RECEIVE_SEARCH_SHOPS, res.data)
+    },
+
+
+
+
+
 
     //同步更新已选中的商品数量
     UpdateFoodCount({ commit }, Aoptions) {

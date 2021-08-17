@@ -19,6 +19,7 @@ export default {
     graphicalCode: "",//一次性图形验证码
     SendCode: "",//手机短信验证码
     userInfo: {}, // 用户信息  用户退出
+    searchShops: [], // 搜索得到的商家列表
 
 
     info: {}, // 商家信息
@@ -27,5 +28,4 @@ export default {
 
 
     cartFoods: [], // 购物车中食物的列表
-    searchShops: [], // 搜索得到的商家列表
 }
