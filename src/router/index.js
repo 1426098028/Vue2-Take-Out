@@ -1,15 +1,31 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Msite from "../views/Msite/Msite.vue"//首页    --一级路由
-import Search from "../views/Search/Search.vue"//搜索   --一级路由
-import Order from "../views/Order/Order.vue"//订单    --一级路由
-import Profile from "../views/Profile/Profile.vue"//个人    --一级路由
-import Login from "../views/Login/Login.vue"//登录
 
-import Shop from "../views/Shop/Shop.vue"//食品商家   --一级路由
-import ShopGoods from "../views/Shop/ShopGoods/ShopGoods.vue"//食品商家商品    --二级路由
-import ShopInfo from "../views/Shop/ShopInfo/ShopInfo.vue"//食品商家信息    --二级路由
-import ShopRatings from "../views/Shop/ShopRatings/ShopRatings.vue"//食品商家评分    --二级路由
+//路由懒加载
+const Msite = () => import("../views/Msite/Msite.vue")//首页    --一级路由
+const Search = () => import("../views/Search/Search.vue")//搜索   --一级路由
+const Order = () => import("../views/Order/Order.vue")//订单    --一级路由
+const Profile = () => import("../views/Profile/Profile.vue")//个人    --一级路由
+const Login = () => import("../views/Login/Login.vue")//登录    --一级路由
+
+
+const Shop = () => import("../views/Shop/Shop.vue")//食品商家   --一级路由
+const ShopGoods = () => import("../views/Shop/ShopGoods/ShopGoods.vue")//食品商家商品    --二级路由
+const ShopInfo = () => import("../views/Shop/ShopInfo/ShopInfo.vue")//食品商家信息    --二级路由
+const ShopRatings = () => import("../views/Shop/ShopRatings/ShopRatings.vue")//食品商家评分    --二级路由
+
+
+
+// import Msite from "../views/Msite/Msite.vue" //首页    --一级路由
+// import Search from "../views/Search/Search.vue"//搜索   --一级路由
+// import Order from "../views/Order/Order.vue"//订单    --一级路由
+// import Profile from "../views/Profile/Profile.vue"//个人    --一级路由
+// import Login from "../views/Login/Login.vue"//登录
+
+// import Shop from "../views/Shop/Shop.vue"//食品商家   --一级路由
+// import ShopGoods from "../views/Shop/ShopGoods/ShopGoods.vue"//食品商家商品    --二级路由
+// import ShopInfo from "../views/Shop/ShopInfo/ShopInfo.vue"//食品商家信息    --二级路由
+// import ShopRatings from "../views/Shop/ShopRatings/ShopRatings.vue"//食品商家评分    --二级路由
 
 Vue.use(VueRouter)
 
@@ -17,7 +33,7 @@ const routes = [
   {
     path: '/Msite',
     name: 'Msite',
-    component: Msite,
+    component: Msite,//路由懒加载
     meta: {
       iSshowFooter: true
     }
